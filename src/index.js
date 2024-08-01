@@ -1,28 +1,29 @@
 import React from "react";
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 
-// const root = document.getElementById("root");
+const handleClick = (state) => {
+    console.log("I got clicked",state);
+}
 
-// const p = document.createElement('p');
+const morning = true;
 
-// p.innerText = "Hello Kush";
+const moringText = "good morning";
 
-// root.appendChild(p);
+const afternoonText = " good afternoon";
 
-// React 
+const div = <div className="text">{morning?moringText:afternoonText}<span onClick={()=>handleClick(morning)}>, John</span></div>
 
-const child = React.createElement("div",{},"Hello Hello World");
+const GenerateComponent =  () => <>
+    {div}
+    i am working now.
+    </>;
 
-// const div = React.createElement("div",{className : 'text'},"Hello World");
 
-const div = React.createElement("div",{className : 'text'},child);
-
-
-console.log(div);
+console.log(GenerateComponent);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-root.render(div);
+root.render(<GenerateComponent/>);
 
 
 
