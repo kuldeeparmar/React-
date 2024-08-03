@@ -1,8 +1,10 @@
-import React from 'react'
+import React,{memo} from 'react'
 
-const Button = (props) => {
+const Button = memo((props) => {
 
   console.log(props);
+
+  console.log("Rendering Button");
 
   const {children,clickButton,data} = props;
 
@@ -16,6 +18,6 @@ const Button = (props) => {
      {data?.a?.b?.c}
     </button>
   )
-}
+})
 
 export default Button;
