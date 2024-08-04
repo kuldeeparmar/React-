@@ -1,9 +1,9 @@
-import React,{memo} from 'react'
+import React,{memo, useEffect} from 'react'
 
 const Text = memo((props) => {
  
   const {children} = props;
-  console.log(children);
+
   return (
     <div>
       {children}
