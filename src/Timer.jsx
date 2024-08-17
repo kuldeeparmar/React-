@@ -1,4 +1,4 @@
-import React,{useCallback,useEffect,useState,useLayoutEffect} from "react";
+import React,{useCallback,useEffect,useState,useLayoutEffect,useRef} from "react";
 
 const Timer = (props) => {
 
@@ -6,52 +6,38 @@ const Timer = (props) => {
     
     const [counter,setData] = useState(0);
 
+    const interval = useRef(null);
+
     useEffect(()=>{
 
-        const interval = setInterval(() => {
+        interval.current = setInterval(() => {
             console.log("hello World");
             setData((prevData) => prevData+1)
         },1000);
 
         console.log("Id of interval ", interval);
 
-
-        return () => {
-            console.log("Clearing Interval");
-            clearInterval(interval);    
-        }
-
     },[])
 
-    useEffect(() => {
-        
-        return () => {
-            console.log("Custom data is Tregered");
-        }
-
-    },[customData])
-
-    useEffect(() => {
-
-        console.log(
-            "Hello Hello Hello"
-        )
-        
-        return () => {
-            console.log("Hello from Rendering");
-        }
-    })
+    const handleStop = () => {
+        clearInterval(interval.current);
+    }
 
 
-   useLayoutEffect(()=>{
-    console.log("UseLayout Effect");
-   })
+    const handleStart = () => {
+        interval.current = setInterval(() => {
+            console.log("hello World");
+            setData((prevData) => prevData+1)
+        },1000);
+    }
 
 
     return <>
      <span>The counter is running : {counter}</span>
      <br/>
      <span>{customData}</span>
+     <button onClick={handleStart}>Start</button>
+     <button onClick={handleStop} >Stop</button>
     </>
 
 }
