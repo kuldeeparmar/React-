@@ -1,4 +1,4 @@
-import React,{useCallback,useEffect,useState} from "react";
+import React,{useCallback,useEffect,useState,useLayoutEffect} from "react";
 
 const Timer = (props) => {
 
@@ -23,9 +23,35 @@ const Timer = (props) => {
 
     },[])
 
+    useEffect(() => {
+        
+        return () => {
+            console.log("Custom data is Tregered");
+        }
+
+    },[customData])
+
+    useEffect(() => {
+
+        console.log(
+            "Hello Hello Hello"
+        )
+        
+        return () => {
+            console.log("Hello from Rendering");
+        }
+    })
+
+
+   useLayoutEffect(()=>{
+    console.log("UseLayout Effect");
+   })
+
 
     return <>
-     <span>{customData} : {counter}</span>
+     <span>The counter is running : {counter}</span>
+     <br/>
+     <span>{customData}</span>
     </>
 
 }
