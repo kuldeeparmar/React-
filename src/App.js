@@ -9,19 +9,24 @@ import PrintTable from './PrintTable.jsx'
 import { ThemeContext } from "./ThemeContext.js";
 import Navbar from './Navbar.js'
 import { createPortal } from "react-dom";
+import { useSelector, useDispatch } from 'react-redux'
+import { decrement, increment, incrementByAmount } from './counterSlice'
 
 
 
 
 const App = () => {
 
-  const [show,setshow] = useState(false);
+  const count = useSelector((state) => state.counter.value)
+  const dispatch = useDispatch()
 
   return (
     <>
-    Hey i am inside root 
-    <button onClick={() => setshow(!show)}>Show Modal</button>
-    {show && createPortal(<div>This is modal</div>,document.body)}
+    {count}
+    <br/>
+    <button onClick={() => dispatch(increment())}>increment</button>
+    <button onClick={() => dispatch(decrement())}>decrement</button>
+    <button onClick={() => dispatch(incrementByAmount(5))}>increment by amount</button>
     </>
   );
 };
