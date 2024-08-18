@@ -8,21 +8,21 @@ import SecondParent from './SecondParent.jsx'
 import PrintTable from './PrintTable.jsx'
 import { ThemeContext } from "./ThemeContext.js";
 import Navbar from './Navbar.js'
+import { createPortal } from "react-dom";
+
 
 
 
 const App = () => {
 
-  const [theme,setTheme] = useState('dark');
+  const [show,setshow] = useState(false);
+
   return (
-    <ThemeContext.Provider value={[theme,setTheme]}>
-
-      <Navbar/>
-
-    </ThemeContext.Provider>
-
-    
-    
+    <>
+    Hey i am inside root 
+    <button onClick={() => setshow(!show)}>Show Modal</button>
+    {show && createPortal(<div>This is modal</div>,document.body)}
+    </>
   );
 };
 
