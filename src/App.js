@@ -1,32 +1,35 @@
-import React, { useState, lazy,useCallback,Suspense ,useEffect ,useRef , useMemo} from "react";
-import Button from "./Button.jsx";
-import Text from "./Text.jsx";
-import Timer from "./Timer.jsx";
-import ButtonWithTooltip from './ButtonWithTooltip.jsx'
-import Input from './Input.jsx'
-import SecondParent from './SecondParent.jsx'
-import PrintTable from './PrintTable.jsx'
-import { ThemeContext } from "./ThemeContext.js";
-import Navbar from './Navbar.js'
-import { createPortal } from "react-dom";
-import { useSelector, useDispatch } from 'react-redux'
-import { decrement, increment, incrementByAmount } from './counterSlice'
-
-
+import React from "react";
+import { Route,Routes,Link,useParams } from "react-router-dom"; 
 
 
 const App = () => {
 
-  const count = useSelector((state) => state.counter.value)
-  const dispatch = useDispatch()
+  const Home = () => {
+    
+    return <div> I am home</div>
+  }
 
+  const About = () => {
+    return <div> I am About us</div>
+  }
+
+  const Profile = () => {
+    const {username} = useParams();
+    return <div>Hello user , {username}</div>
+  }
   return (
     <>
-    {count}
+    <Link to='/'>home</Link>
     <br/>
-    <button onClick={() => dispatch(increment())}>increment</button>
-    <button onClick={() => dispatch(decrement())}>decrement</button>
-    <button onClick={() => dispatch(incrementByAmount(5))}>increment by amount</button>
+    <Link to="/about">about</Link>
+    <br/>
+    <Link to='/profile/Kuldeep'>profile</Link>
+    <br/>
+    <Routes>
+      <Route path='/' element={<Home/>}></Route>
+      <Route path='/about' element={<About/>}></Route>
+      <Route path="/profile/:username" element={<Profile/>}></Route>
+    </Routes>
     </>
   );
 };
