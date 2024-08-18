@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect ,useRef } from "react";
+import React, { useState, useCallback, useEffect ,useRef , useMemo} from "react";
 import Button from "./Button.jsx";
 import Text from "./Text.jsx";
 import Timer from "./Timer.jsx";
@@ -13,6 +13,11 @@ const App = () => {
 
   const [counter1,setCounter1] = useState(0);
   const [counter2,setCounter2] = useState(0);
+  const tmp = 10;
+  const obj = {
+    name : 'Kuldeep'
+  }
+  const arr =useMemo(() => [1,2] ,[]);
 
   return (
     <>
@@ -23,7 +28,7 @@ const App = () => {
     <button onClick={() => setCounter2((prev) => prev+1)}>counter2++</button>
     <br/>
 
-    <PrintTable num={counter1}></PrintTable>
+    <PrintTable num={counter1} tmp={tmp} arr={arr}/>
     
     </>
 
