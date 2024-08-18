@@ -1,33 +1,25 @@
 import React, { useState, lazy,useCallback,Suspense ,useEffect ,useRef , useMemo} from "react";
 import Button from "./Button.jsx";
-//import Text from "./Text.jsx";
+import Text from "./Text.jsx";
 import Timer from "./Timer.jsx";
 import ButtonWithTooltip from './ButtonWithTooltip.jsx'
 import Input from './Input.jsx'
 import SecondParent from './SecondParent.jsx'
-
 import PrintTable from './PrintTable.jsx'
+import { ThemeContext } from "./ThemeContext.js";
+import Navbar from './Navbar.js'
 
-function delayForDemo(promise) {
-  return new Promise(resolve => {
-    setTimeout(resolve, 2000);
-  }).then(() => promise);
-}
 
-const Text = lazy(() => delayForDemo(import('./Text.jsx')));
+
 const App = () => {
 
-  const [show,setShow] = useState(false);
+  const [theme,setTheme] = useState('dark');
   return (
-    <>
+    <ThemeContext.Provider value={[theme,setTheme]}>
 
-    <button onClick={() => setShow(!show)}>Show</button>
+      <Navbar/>
 
-    {show && <Suspense fallback={<div>Loading...</div>}>
-      <Text children="Hello World"/>
-    </Suspense>
-    }
-    </>
+    </ThemeContext.Provider>
 
     
     

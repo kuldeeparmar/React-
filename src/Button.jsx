@@ -1,21 +1,23 @@
-import React,{memo} from 'react'
+import React,{memo,useContext} from 'react';
+import {ThemeContext} from './ThemeContext.js'
+
 
 const Button = memo((props) => {
 
-  console.log(props);
+  
+  const {children} = props;
 
-  console.log("Rendering Button");
-
-  const {children,clickButton,data} = props;
+  const [theme,setTheme] = useContext(ThemeContext);
 
   const handleClick = () => {
-       clickButton?.()
+      setTheme((prev) => {
+        return prev === 'dark' ? 'light' : 'dark'
+      })
   }
 
   return (
     <button onClick={handleClick}>
-     {children}
-     {data?.a?.b?.c}
+     {children} {theme}
     </button>
   )
 })
